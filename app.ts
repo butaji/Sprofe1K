@@ -175,7 +175,7 @@ async function review(ctx: any, update: Boolean) {
 
   try {
     await ctx.editMessageText(
-      `(I) Progress: ${(user.progress ?? [])
+      `(I-${item.id}) Progress: ${(user.progress ?? [])
         .map((x) => (x ? "✅" : "❌"))
         .slice(-4)}
     
@@ -212,7 +212,7 @@ Which of the following is the correct translation for "${item.original}"?`
     await ctx.deleteMessage();
 
     await ctx.reply(
-      `(II) Progress: ${(user.progress ?? [])
+      `(II-${item.id}) Progress: ${(user.progress ?? [])
         .map((x) => (x ? "✅" : "❌"))
         .slice(-4)}
     
