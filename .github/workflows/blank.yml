@@ -1,25 +1,21 @@
-name: Reload App on Commit
-
-on:
+name: Deploy to DigitalOcean Droplet
+'on':
   push:
     branches:
       - main
 
 jobs:
-  reload:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up SSH
-        uses: shimataro/ssh-key-action@v2.5.0
+      - name: Deploy to DigitalOcean Droplet
+        uses: appleboy/ssh-action@master
         with:
-          host: 143.244.145.255
-          username: root
-          private_key: ${{ secrets.DIGITAL_OCEAN_SSH_PRIVATE_KEY }}
-      - name: Fetch Latest Code
-        run: |
-          cd Sprofe1K/
-          git fetch --all
-          git reset --hard origin/main
-      - name: Reload App
-        run: pm2 reload
+          host: ${{secrets.DIGITAL_OCEAN_HOST}}
+          username: ${{secrets.DIGITAL_OCEAN_USERNAME}}
+          key: ${{ secrets.DIGITAL_OCEAN_SSH_PRIVATE_KEY }}
+          script: |
+            cd Sprofe1K/
+            git fetch -all
+            git reset --hard origin/main
+            pm2 reload
