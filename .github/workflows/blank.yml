@@ -17,5 +17,5 @@ jobs:
           script: |
             cd Sprofe1K/
             git fetch --all
-            mpn update
+            npm update
             pm2 reload 0
