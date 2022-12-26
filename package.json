@@ -1,0 +1,26 @@
+{
+  "name": "sprofe1k",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/butaji/Sprofe1K.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/butaji/Sprofe1K/issues"
+  },
+  "homepage": "https://github.com/butaji/Sprofe1K#readme",
+  "dependencies": {
+    "@types/nedb": "^1.8.12",
+    "csv-parse": "^5.3.3",
+    "dotenv": "^16.0.3",
+    "nedb-promises": "^6.2.1",
+    "telegraf": "^4.11.2"
+  }
+}
