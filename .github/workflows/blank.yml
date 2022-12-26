@@ -1,0 +1,25 @@
+name: Reload App on Commit
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  reload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up SSH
+        uses: shimataro/setup-ssh-action@v1
+        with:
+          host: 143.244.145.255
+          username: root
+          private_key: ${{ secrets.DIGITAL_OCEAN_SSH_PRIVATE_KEY }}
+      - name: Fetch Latest Code
+        run: |
+          cd /app
+          git fetch --all
+          git reset --hard origin/master
+      - name: Reload App
+        run: pm2 reload
