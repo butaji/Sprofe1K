@@ -1,15 +1,25 @@
-name: remote ssh command
-on: [push]
+name: CI
+on: push
 jobs:
-
-  build:
-    name: Build
+  deploy:
+    name: "Deploy to staging"
     runs-on: ubuntu-latest
     steps:
-    - name: executing remote ssh commands using password
-      uses: appleboy/ssh-action@v0.1.6
-      with:
-        host: ${{ secrets.DIGITAL_OCEAN_HOST }}
-        username: ${{ secrets.DIGITAL_OCEAN_USERNAME }}
-        key: ${{ secrets.DIGITAL_OCEAN_SSH_PRIVATE_KEY }}
-        script: whoami
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/staging.key
+          chmod 600 ~/.ssh/staging.key
+          cat >>~/.ssh/config <<END
+          Host staging
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/staging.key
+            StrictHostKeyChecking no
+          END
+        env:
+          SSH_USER: ${{ secrets.DIGITAL_OCEAN_USERNAME }}
+          SSH_KEY: ${{ secrets.DIGITAL_OCEAN_SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.DIGITAL_OCEAN_HOST }}
+      - name: whoami
+        run: ssh staging 'whoami'
