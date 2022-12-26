@@ -1,21 +1,15 @@
-name: Deploy to DigitalOcean Droplet
-'on':
-  push:
-    branches:
-      - main
-
+name: remote ssh command
+on: [push]
 jobs:
-  deploy:
+
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to DigitalOcean Droplet
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{secrets.DIGITAL_OCEAN_HOST}}
-          username: ${{secrets.DIGITAL_OCEAN_USERNAME}}
-          key: ${{ secrets.DIGITAL_OCEAN_SSH_PRIVATE_KEY }}
-          script: |
-            cd Sprofe1K/
-            git fetch -all
-            git reset --hard origin/main
-            pm2 reload
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@v0.1.6
+      with:
+        host: ${{ secrets.DIGITAL_OCEAN_HOST }}
+        username: ${{ secrets.DIGITAL_OCEAN_USERNAME }}
+        key: ${{ secrets.DIGITAL_OCEAN_SSH_PRIVATE_KEY }}
+        script: whoami
