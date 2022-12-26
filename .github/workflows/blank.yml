@@ -16,6 +16,6 @@ jobs:
           password: ${{ secrets.DIGITAL_OCEAN_PASSWORD }}
           script: |
             cd Sprofe1K/
-            git fetch --all
+            git pull
             npm update
             pm2 reload 0
