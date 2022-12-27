@@ -349,7 +349,7 @@ async function getIncorrectAnswers(word: Word) {
     .limit(3);
 
   if (words.length > 0) {
-    return words.map((w) => w.original);
+    return words.map((w) => w.target);
   }
 
   console.log(
