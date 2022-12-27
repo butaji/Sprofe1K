@@ -36,7 +36,7 @@ const usersDb: Datastore<User> = Datastore.create({
 const languageFiles: Record<string, Word[]> = {};
 
 // Read and parse the language files
-const languages = ["spanish"];
+const languages = ["spanish","german","french","italian","russian"];
 
 for (const language of languages) {
   languageFiles[language] = [];
