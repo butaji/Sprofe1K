@@ -110,7 +110,9 @@ bot.action(/^review:.+$/, async (ctx) => {
 
     // await ctx.deleteMessage(ctx.callbackQuery.message?.message_id);
 
-    review(ctx, result);
+    if (result) {
+      review(ctx, result);
+    } 
   }
 });
 
